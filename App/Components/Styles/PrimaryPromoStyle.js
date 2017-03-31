@@ -26,7 +26,7 @@ export default StyleSheet.create({
   recommendationContainer: {
     flex: 1,
     flexDirection: 'row',
-    marginTop: Metrics.baseMargin
+    marginTop: Metrics.doubleBaseMargin
   },
   star: {
     marginRight: 6
