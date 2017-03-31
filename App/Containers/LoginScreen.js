@@ -3,16 +3,14 @@ import {
   View,
   ScrollView,
   Text,
-  Image,
-  Keyboard,
-  LayoutAnimation
+  Image
 } from 'react-native';
 import { SocialIcon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import Styles from './Styles/LoginScreenStyles';
-import { Images, Metrics } from '../Themes';
+import { Images } from '../Themes';
 import LoginActions from '../Redux/LoginRedux';
-import { Actions as NavigationActions } from 'react-native-router-flux';
+import { Actions as NavigationActions, ActionConst } from 'react-native-router-flux';
 
 class LoginScreen extends React.Component {
   static propTypes = {
@@ -27,12 +25,9 @@ class LoginScreen extends React.Component {
 
   constructor (props) {
     super(props);
-    this.state = {
-      username: '',
-      password: '',
-      visibleHeight: Metrics.screenHeight,
-      topLogo: { width: Metrics.screenWidth }
-    };
+
+    this.handlePressLogin = this.handlePressLogin.bind(this);
+
     this.isAttempting = false;
   }
 
@@ -44,42 +39,11 @@ class LoginScreen extends React.Component {
     }
   }
 
-  componentWillMount () {
-    // Using keyboardWillShow/Hide looks 1,000 times better, but doesn't work on Android
-    // TODO: Revisit this if Android begins to support - https://github.com/facebook/react-native/issues/3468
-    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
-    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
-  }
-
-  componentWillUnmount () {
-    this.keyboardDidShowListener.remove();
-    this.keyboardDidHideListener.remove();
-  }
-
-  keyboardDidShow = (e) => {
-    // Animation types easeInEaseOut/linear/spring
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    let newSize = Metrics.screenHeight - e.endCoordinates.height;
-    this.setState({
-      visibleHeight: newSize,
-      topLogo: {width: 100, height: 70}
-    });
-  }
-
-  keyboardDidHide = (e) => {
-    // Animation types easeInEaseOut/linear/spring
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    this.setState({
-      visibleHeight: Metrics.screenHeight,
-      topLogo: {width: Metrics.screenWidth}
-    });
-  }
-
-  handlePressLogin = () => {
-    const { username, password } = this.state;
+  handlePressLogin () {
     this.isAttempting = true;
-    // attempt a login - a saga is listening to pick it up from here.
-    this.props.attemptLogin(username, password);
+
+    // DEBUG
+    NavigationActions.homeScreen({type: ActionConst.REPLACE});
   }
 
   handleChangeUsername = (text) => {
@@ -92,7 +56,7 @@ class LoginScreen extends React.Component {
 
   render () {
     return (
-      <ScrollView contentContainerStyle={{justifyContent: 'center'}} style={[Styles.container, {height: this.state.visibleHeight}]} keyboardShouldPersistTaps='always'>
+      <ScrollView contentContainerStyle={{justifyContent: 'center'}} style={[Styles.container]} keyboardShouldPersistTaps='always'>
         <Image source={Images.logo} style={[Styles.topLogo]} />
         <View style={Styles.form}>
           <View style={Styles.row}>
@@ -103,6 +67,7 @@ class LoginScreen extends React.Component {
               title={'Sign in with Twitter'}
               type={'twitter'}
               button
+              onPress={this.handlePressLogin}
             />
           </View>
         </View>
