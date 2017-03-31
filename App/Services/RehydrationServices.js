@@ -3,13 +3,14 @@ import { AsyncStorage } from 'react-native';
 import { persistStore } from 'redux-persist';
 import StartupActions from '../Redux/StartupRedux';
 
-const updateReducers = (store: Object) => {
+const updateReducers = (store) => {
   const reducerVersion = ReduxPersist.reducerVersion;
   const config = ReduxPersist.storeConfig;
   const startup = () => store.dispatch(StartupActions.startup());
 
   // Check to ensure latest reducer version
   AsyncStorage.getItem('reducerVersion').then((localVersion) => {
+    console.log(localVersion + ' vs ' + reducerVersion);
     if (localVersion !== reducerVersion) {
       console.tron.display({
         name: 'PURGE',
@@ -24,7 +25,8 @@ const updateReducers = (store: Object) => {
       persistStore(store, config, startup).purge();
       AsyncStorage.setItem('reducerVersion', reducerVersion);
     } else {
-      persistStore(store, config, startup);
+      // DEBUG
+      // persistStore(store, config, startup).purge();
     }
   }).catch(() => {
     persistStore(store, config, startup);

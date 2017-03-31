@@ -8,7 +8,9 @@ export default class NavBar extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <AvatarDropDown />
+        <AvatarDropDown
+          showDropdown={this.props.showDropdown}
+        />
         <Text style={styles.username}>megatricycle</Text>
       </View>
     );

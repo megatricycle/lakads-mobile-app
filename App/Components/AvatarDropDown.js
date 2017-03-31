@@ -5,8 +5,14 @@ import { Colors, Images } from '../Themes';
 import styles from './Styles/AvatarDropDownStyle';
 
 export default class AvatarDropDown extends React.Component {
+  constructor () {
+    super();
+
+    this.handlePress = this.handlePress.bind(this);
+  }
+
   handlePress () {
-    window.alert('hi');
+    this.props.showDropdown();
   }
 
   render () {
