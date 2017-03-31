@@ -1,5 +1,10 @@
 import React from 'react';
-import { ScrollView, Text, KeyboardAvoidingView, View, TouchableWithoutFeedback } from 'react-native';
+import { ScrollView,
+  Text,
+  KeyboardAvoidingView,
+  View,
+  TouchableWithoutFeedback
+} from 'react-native';
 import { connect } from 'react-redux';
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
@@ -7,6 +12,7 @@ import { connect } from 'react-redux';
 import NavBar from '../Components/NavBar';
 import DropDown from '../Components/DropDown';
 import HomeActions from '../Redux/HomeRedux';
+import PrimaryPromo from '../Components/PrimaryPromo';
 
 // Styles
 import styles from './Styles/HomeScreenStyle';
@@ -28,20 +34,18 @@ class Home extends React.Component {
 
   render () {
     return (
-      <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.container}>
         <TouchableWithoutFeedback onPress={this.handlePress}>
           <View style={{flex: 1}}>
             <KeyboardAvoidingView behavior='position'>
-              <NavBar
-                showDropdown={this.props.showDropdown}
-                />
+              <NavBar showDropdown={this.props.showDropdown} />
             </KeyboardAvoidingView>
 
-            <View style={{flex: 1}}>
-              <Text>Recommended here</Text>
+            <ScrollView style={{flex: 1}}>
+              <PrimaryPromo />
 
               <Text>You might also like...</Text>
-            </View>
+            </ScrollView>
 
             {this.props.home.isDropdownOpen
                 ? (<DropDown />)
@@ -49,7 +53,7 @@ class Home extends React.Component {
               }
           </View>
         </TouchableWithoutFeedback>
-      </ScrollView>
+      </View>
     );
   }
 }
