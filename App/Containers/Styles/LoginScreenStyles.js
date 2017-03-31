@@ -4,49 +4,28 @@ import { Colors, Metrics } from '../../Themes';
 export default StyleSheet.create({
   container: {
     paddingTop: 70,
-    backgroundColor: Colors.background
+    backgroundColor: Colors.primary
   },
   form: {
-    backgroundColor: Colors.snow,
     margin: Metrics.baseMargin,
+    marginTop: 0,
     borderRadius: 4
   },
   row: {
-    paddingVertical: Metrics.doubleBaseMargin,
-    paddingHorizontal: Metrics.doubleBaseMargin
-  },
-  rowLabel: {
-    color: Colors.charcoal
-  },
-  textInput: {
-    height: 40,
-    color: Colors.coal
-  },
-  textInputReadonly: {
-    height: 40,
-    color: Colors.steel
-  },
-  loginRow: {
-    paddingBottom: Metrics.doubleBaseMargin,
-    paddingHorizontal: Metrics.doubleBaseMargin,
-    flexDirection: 'row'
-  },
-  loginButtonWrapper: {
-    flex: 1
-  },
-  loginButton: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: Colors.charcoal,
-    backgroundColor: Colors.panther,
-    padding: 6
-  },
-  loginText: {
-    textAlign: 'center',
-    color: Colors.silver
+    paddingVertical: Metrics.baseMargin,
+    paddingHorizontal: Metrics.baseMargin
   },
   topLogo: {
     alignSelf: 'center',
-    resizeMode: 'contain'
+    resizeMode: 'center',
+    width: 300,
+    height: 300,
+    margin: 0
+  },
+  introText: {
+    textAlign: 'center',
+    color: Colors.snow,
+    fontSize: 24,
+    margin: 0
   }
 });

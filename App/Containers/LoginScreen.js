@@ -3,15 +3,14 @@ import {
   View,
   ScrollView,
   Text,
-  TextInput,
-  TouchableOpacity,
   Image,
   Keyboard,
   LayoutAnimation
 } from 'react-native';
+import { SocialIcon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import Styles from './Styles/LoginScreenStyles';
-import {Images, Metrics} from '../Themes';
+import { Images, Metrics } from '../Themes';
 import LoginActions from '../Redux/LoginRedux';
 import { Actions as NavigationActions } from 'react-native-router-flux';
 
@@ -29,8 +28,8 @@ class LoginScreen extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      username: 'reactnative@infinite.red',
-      password: 'password',
+      username: '',
+      password: '',
       visibleHeight: Metrics.screenHeight,
       topLogo: { width: Metrics.screenWidth }
     };
@@ -92,60 +91,19 @@ class LoginScreen extends React.Component {
   }
 
   render () {
-    const { username, password } = this.state;
-    const { fetching } = this.props;
-    const editable = !fetching;
-    const textInputStyle = editable ? Styles.textInput : Styles.textInputReadonly;
     return (
       <ScrollView contentContainerStyle={{justifyContent: 'center'}} style={[Styles.container, {height: this.state.visibleHeight}]} keyboardShouldPersistTaps='always'>
-        <Image source={Images.logo} style={[Styles.topLogo, this.state.topLogo]} />
+        <Image source={Images.logo} style={[Styles.topLogo]} />
         <View style={Styles.form}>
           <View style={Styles.row}>
-            <Text style={Styles.rowLabel}>Username</Text>
-            <TextInput
-              ref='username'
-              style={textInputStyle}
-              value={username}
-              editable={editable}
-              keyboardType='default'
-              returnKeyType='next'
-              autoCapitalize='none'
-              autoCorrect={false}
-              onChangeText={this.handleChangeUsername}
-              underlineColorAndroid='transparent'
-              onSubmitEditing={() => this.refs.password.focus()}
-              placeholder='Username' />
+            <Text style={Styles.introText}>Promos. Special for you.</Text>
           </View>
-
           <View style={Styles.row}>
-            <Text style={Styles.rowLabel}>Password</Text>
-            <TextInput
-              ref='password'
-              style={textInputStyle}
-              value={password}
-              editable={editable}
-              keyboardType='default'
-              returnKeyType='go'
-              autoCapitalize='none'
-              autoCorrect={false}
-              secureTextEntry
-              onChangeText={this.handleChangePassword}
-              underlineColorAndroid='transparent'
-              onSubmitEditing={this.handlePressLogin}
-              placeholder='Password' />
-          </View>
-
-          <View style={[Styles.loginRow]}>
-            <TouchableOpacity style={Styles.loginButtonWrapper} onPress={this.handlePressLogin}>
-              <View style={Styles.loginButton}>
-                <Text style={Styles.loginText}>Sign In</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={Styles.loginButtonWrapper} onPress={NavigationActions.pop}>
-              <View style={Styles.loginButton}>
-                <Text style={Styles.loginText}>Cancel</Text>
-              </View>
-            </TouchableOpacity>
+            <SocialIcon
+              title={'Sign in with Twitter'}
+              type={'twitter'}
+              button
+            />
           </View>
         </View>
 
