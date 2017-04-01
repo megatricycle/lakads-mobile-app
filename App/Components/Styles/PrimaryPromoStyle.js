@@ -4,7 +4,7 @@ import { Metrics, Colors } from '../../Themes/';
 export default StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Metrics.titlePadding
+    margin: 0
   },
   title: {
     fontWeight: 'bold',

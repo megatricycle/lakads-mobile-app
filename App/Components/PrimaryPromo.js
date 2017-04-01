@@ -16,6 +16,7 @@ export default class PrimaryPromo extends React.Component {
       <Card
         image={Images.camel}
         imageStyle={styles.image}
+        containerStyle={styles.container}
       >
         <View style={styles.upperContainer}>
           <View>

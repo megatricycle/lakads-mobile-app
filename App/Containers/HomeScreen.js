@@ -1,6 +1,5 @@
 import React from 'react';
 import { ScrollView,
-  Text,
   KeyboardAvoidingView,
   View,
   TouchableWithoutFeedback
@@ -13,6 +12,7 @@ import NavBar from '../Components/NavBar';
 import DropDown from '../Components/DropDown';
 import HomeActions from '../Redux/HomeRedux';
 import PrimaryPromo from '../Components/PrimaryPromo';
+import OtherPromos from '../Components/OtherPromos';
 
 // Styles
 import styles from './Styles/HomeScreenStyle';
@@ -35,16 +35,18 @@ class Home extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <TouchableWithoutFeedback onPress={this.handlePress}>
+        <TouchableWithoutFeedback onPress={this.handlePress} disabled={!this.props.home.isDropdownOpen}>
           <View style={{flex: 1}}>
             <KeyboardAvoidingView behavior='position'>
               <NavBar showDropdown={this.props.showDropdown} />
             </KeyboardAvoidingView>
 
-            <ScrollView style={{flex: 1}}>
+            <ScrollView
+              style={styles.contentContainer}
+            >
               <PrimaryPromo />
 
-              <Text>You might also like...</Text>
+              <OtherPromos />
             </ScrollView>
 
             {this.props.home.isDropdownOpen
