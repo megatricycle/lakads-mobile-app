@@ -12,5 +12,13 @@ export default StyleSheet.create({
   },
   username: {
     color: Colors.snow
+  },
+  backButton: {
+    padding: 15,
+    paddingRight: 25
+  },
+  promoName: {
+    color: Colors.snow,
+    fontSize: 16
   }
 });

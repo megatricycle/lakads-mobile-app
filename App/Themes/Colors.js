@@ -7,7 +7,8 @@ const colors = {
   twitter: '#4099FF',
   grey: '#D1D1D1',
   black: 'black',
-  transparent: 'rgba(0,0,0,0)'
+  transparent: 'rgba(0,0,0,0)',
+  red: 'red'
 };
 
 export default colors;

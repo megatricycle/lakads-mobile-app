@@ -14,11 +14,11 @@ export default Creators;
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  isLoggedIn: false,
+  isLoggedIn: true,
   oauth_token: null,
   oauth_token_secret: null,
   oauth_verifier: null,
-  screen_name: null
+  screen_name: 'megatricycle'
 });
 
 /* ------------- Reducers ------------- */
