@@ -6,11 +6,12 @@ import { ScrollView,
 } from 'react-native';
 import { connect } from 'react-redux';
 // Add Actions - replace 'Your' with whatever your reducer is called :)
-// import YourActions from '../Redux/YourRedux'
+import { Actions as NavigationActions, ActionConst } from 'react-native-router-flux';
 
 import NavBar from '../Components/NavBar';
 import DropDown from '../Components/DropDown';
 import HomeActions from '../Redux/HomeRedux';
+import UserActions from '../Redux/UserRedux';
 import PrimaryPromo from '../Components/PrimaryPromo';
 import OtherPromos from '../Components/OtherPromos';
 
@@ -22,6 +23,7 @@ class Home extends React.Component {
     super();
 
     this.handlePress = this.handlePress.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   handlePress () {
@@ -32,13 +34,30 @@ class Home extends React.Component {
     this.props.hideDropdown();
   }
 
+  logout () {
+    this.props.logout();
+  }
+
+  componentWillMount () {
+    console.log(this.props.user);
+    if (!this.props.user) {
+      NavigationActions.loginScreen({type: ActionConst.REPLACE});
+    }
+  }
+
+  componentWillReceiveProps (newProps) {
+    if (!newProps.user) {
+      NavigationActions.loginScreen({type: ActionConst.REPLACE});
+    }
+  }
+
   render () {
     return (
       <View style={styles.container}>
         <TouchableWithoutFeedback onPress={this.handlePress} disabled={!this.props.home.isDropdownOpen}>
           <View style={{flex: 1}}>
             <KeyboardAvoidingView behavior='position'>
-              <NavBar showDropdown={this.props.showDropdown} />
+              <NavBar showDropdown={this.props.showDropdown} screenName={this.props.user.screen_name} />
             </KeyboardAvoidingView>
 
             <ScrollView
@@ -50,7 +69,7 @@ class Home extends React.Component {
             </ScrollView>
 
             {this.props.home.isDropdownOpen
-                ? (<DropDown />)
+                ? (<DropDown logout={this.logout} />)
                 : (<View />)
               }
           </View>
@@ -62,14 +81,16 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    home: state.home
+    home: state.home,
+    user: state.user
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     showDropdown: () => dispatch(HomeActions.showDropdown()),
-    hideDropdown: () => dispatch(HomeActions.hideDropdown())
+    hideDropdown: () => dispatch(HomeActions.hideDropdown()),
+    logout: () => dispatch(UserActions.logout())
   };
 };
 

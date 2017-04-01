@@ -4,7 +4,14 @@ import styles from './Styles/DropDownStyle';
 import { Actions as NavigationActions, ActionConst } from 'react-native-router-flux';
 
 export default class DropDown extends React.Component {
+  constructor () {
+    super();
+
+    this.handlePress = this.handlePress.bind(this);
+  }
+
   handlePress () {
+    this.props.logout();
     NavigationActions.loginScreen({type: ActionConst.REPLACE});
   }
 

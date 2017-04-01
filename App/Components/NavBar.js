@@ -11,7 +11,7 @@ export default class NavBar extends React.Component {
         <AvatarDropDown
           showDropdown={this.props.showDropdown}
         />
-        <Text style={styles.username}>megatricycle</Text>
+        <Text style={styles.username}>{this.props.screenName}</Text>
       </View>
     );
   }
