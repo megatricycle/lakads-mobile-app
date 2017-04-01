@@ -18,8 +18,8 @@ class NavigationRouter extends Component {
       <Router>
         <Scene key='drawer' component={NavigationDrawer} open={false}>
           <Scene key='drawerChildrenWrapper' navigationBarStyle={Styles.navBar} titleStyle={Styles.title} leftButtonIconStyle={Styles.leftButton} rightButtonTextStyle={Styles.rightButton}>
-            <Scene key='loginScreen' component={LoginScreen} title='LoginScreen' hideNavBar />
-            <Scene initial key='homeScreen' component={HomeScreen} title='HomeScreen' hideNavBar />
+            <Scene initial key='loginScreen' component={LoginScreen} title='LoginScreen' hideNavBar />
+            <Scene key='homeScreen' component={HomeScreen} title='HomeScreen' hideNavBar />
             {/* temp initial */}
 
             <Scene key='promoScreen' component={PromoScreen} title='PromoScreen' hideNavBar />
